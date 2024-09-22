@@ -2,7 +2,7 @@ import ErrorHander from '../utils/errorhander.js';
 import catchAsyncErrors from './catchAsyncErrors.js';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
-
+import '../config/config.js'
 export const isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
   const { token } = req.cookies;
 
@@ -10,7 +10,7 @@ export const isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHander('Please Login to access this resource', 401));
   }
 
-  const decodedData = jwt.verify(token, 11111);
+  const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
   req.user = await User.findById(decodedData.id);
 
