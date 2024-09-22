@@ -1,13 +1,11 @@
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
 
-// Load environment variables
-dotenv.config();
+import mongoose from 'mongoose';
+import '../config/config.js'
 
 // Connect to MongoDB
 export const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb+srv://aman:aman@cluster0.upajlbh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
+    await mongoose.connect(process.env.MONGODB_URL, {
 
       serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
     });
@@ -18,7 +16,7 @@ export const connectDB = async () => {
   }
 };
 
-// Initiate connection
+// Initiate connectio
 connectDB();
 
 // Handle graceful shutdown
