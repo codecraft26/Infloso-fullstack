@@ -7,7 +7,22 @@ import sendEmail from '../utils/sendEmail.js';
 
 export const registerUser = catchAsyncErrors(async (req, res, next) => {
     const { userName, email, password } = req.body;
+
     try {
+        // Check if user exists with the same email or username
+        const existingUser = await User.findOne({
+            $or: [{ email }, { userName }]
+        });
+
+        if (existingUser) {
+            if (existingUser.email === email) {
+                return next(new ErrorHander('Email already exists. Please use a different email.', 400));
+            }
+            if (existingUser.userName === userName) {
+                return next(new ErrorHander('Username already taken. Please choose a different username.', 400));
+            }
+        }
+
         // Create new user
         const user = await User.create({ userName, email, password });
 

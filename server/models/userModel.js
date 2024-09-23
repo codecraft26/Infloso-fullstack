@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: [true, 'Please enter your password'], minlength: [6, 'Minimum password length is 6 characters'] },
     createdAt: { type: Date, default: Date.now },
     isVerified: { type: Boolean, default: false },
+     resetPasswordToken: String,
+    resetPasswordExpire: Date,
     verificationToken: String,
     verificationExpire: Date,
 });
