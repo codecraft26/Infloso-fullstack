@@ -73,23 +73,6 @@ form {
   background-color: #0056b3;
 }
 
-/* Additional Signup Actions */
-.signup-actions {
-  margin-top: 15px;
-  text-align: center;
-}
-
-.signup-link {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 14px;
-  margin: 0 10px;
-}
-
-.signup-link:hover {
-  text-decoration: underline;
-}
-
 /* Password Field */
 .password-field {
   position: relative;
@@ -108,6 +91,42 @@ form {
   cursor: pointer;
   font-size: 18px;
   color: #333;
+}
+
+/* Terms Container */
+.terms-container {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+/* Loader Overlay */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Ensure it sits above other content */
+}
+
+/* Loader */
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #007bff; /* Blue */
+  border-radius: 50%;
+  width: 50px; /* Adjust size */
+  height: 50px; /* Adjust size */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Responsive Design */
@@ -129,29 +148,16 @@ form {
   }
 }
 
-
-.password-field {
-  position: relative;
-  width: 100%;
-}
-
-.password-field .input-field {
-  padding-right: 40px; /* Add space for the eye icon */
-}
-
-.password-field .toggle-password {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 18px;
-  color: #333;
-}
 .login-link {
   margin-top: 20px;
   text-align: center;
 }
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 0.5em;
+}
+
 
 .login-link a {
   color: #007bff;

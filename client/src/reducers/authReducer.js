@@ -31,31 +31,38 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         user: null,
       };
-    case 'SIGNUP_SUCCESS':
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-        message: action.message,
-        error: null,
-        loading: false,
-      };
-    case 'SIGNUP_FAIL':
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-        error: action.payload,
-        message: null,
-        loading: false,
-      };
-    case 'FORGOT_PASSWORD_SUCCESS':
-      return {
-        ...state,
-        message: action.payload,
-        error: null,
-        loading: false,
-      };
+      case 'SIGNUP_LOADING':
+        return {
+          ...state,
+          loading: true, // Set loading to true when signup is initiated
+        };
+  
+      case 'SIGNUP_SUCCESS':
+        return {
+          ...state,
+          isAuthenticated: false,
+          user: null,
+          message: action.message,
+          error: null,
+          loading: false, // Reset loading after successful signup
+        };
+  
+      case 'SIGNUP_FAIL':
+        return {
+          ...state,
+          isAuthenticated: false,
+          user: null,
+          error: action.payload,
+          message: null,
+          loading: false, // Reset loading after failure
+        };
+      case 'FORGOT_PASSWORD_SUCCESS':
+        return {
+          ...state,
+          message: action.payload,
+          error: null,
+          loading: false,
+        };
     case 'FORGOT_PASSWORD_FAIL':
       return {
         ...state,

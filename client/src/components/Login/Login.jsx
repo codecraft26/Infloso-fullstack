@@ -11,51 +11,43 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false); // New state for Remember Me
+  const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { error, isAuthenticated, loading } = useSelector((state) => state.auth);
 
-  // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // If "Remember Me" is checked, store the credentials in localStorage
     if (rememberMe) {
       localStorage.setItem('rememberedUser', JSON.stringify({ email, password }));
     } else {
-      localStorage.removeItem('rememberedUser'); // Clear stored credentials if unchecked
+      localStorage.removeItem('rememberedUser');
     }
-
     dispatch(loginUser({ email, password }));
   };
 
-  // Load remembered credentials on component mount
   useEffect(() => {
     const savedCredentials = localStorage.getItem('rememberedUser');
     if (savedCredentials) {
       const { email, password } = JSON.parse(savedCredentials);
       setEmail(email);
       setPassword(password);
-      setRememberMe(true); // Set "Remember Me" as checked
+      setRememberMe(true);
     }
   }, []);
 
-  // Redirect if authenticated
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/');
     }
   }, [isAuthenticated, navigate]);
 
-  // Handle error display
   useEffect(() => {
     if (error) {
       toast.error(error, { autoClose: 3000 });
     }
   }, [error]);
 
-  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -101,6 +93,7 @@ const Login = () => {
             {loading ? 'Loading...' : 'Login'}
           </button>
         </div>
+        {loading && <div className="loader"></div>} {/* Loader added here */}
       </form>
 
       <div className="login-actions">

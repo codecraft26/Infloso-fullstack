@@ -36,12 +36,14 @@ export const loginUser = (credentials) => async (dispatch) => {
 };
 
 export const signupUser = (userDetails) => async (dispatch) => {
+  dispatch({ type: 'SIGNUP_LOADING' }); // Add this line to indicate loading
+
   try {
     const { data } = await axios.post(API_ENDPOINTS.REGISTER, userDetails);
 
     dispatch({
       type: 'SIGNUP_SUCCESS',
-      payload: data.message,
+      message: data.message, // Ensure to use 'message' here
     });
   } catch (error) {
     dispatch({

@@ -1,0 +1,12 @@
+SuccessPage.success-page {
+  text-align: center;
+  padding: 20px;
+}
+
+.success-page h1 {
+  color: #28a745; /* Green color */
+}
+
+.success-page p {
+  margin: 15px 0;
+}

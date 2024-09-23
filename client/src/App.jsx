@@ -8,12 +8,13 @@ import HomePage from './components/HomePage';
 import ForgotPassword from './components/forgotPassword/ForgotPassword'
 import ResetPassword from './components/forgotPassword/ResetPassword';
 import UserProfile from './components/UserProfile';
-// import './styles.css'; // Import your CSS file
+import './App.css';
+import SuccessPage from './components/shared/SuccessPage';
 
 const App = () => {
   return (
     <>
-      <p>aman</p>
+
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -22,7 +23,8 @@ const App = () => {
           <Route path='/forgot-password' element={<ForgotPassword/>}/>
           <Route path='/reset-password/:token' element={<ResetPassword/>}/>
           <Route path="/me" element={<UserProfile />} />
-       
+
+          <Route path='/success' element={<SuccessPage/>}/>
         </Routes>
       </BrowserRouter>
     </>

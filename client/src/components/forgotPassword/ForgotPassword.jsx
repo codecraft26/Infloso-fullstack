@@ -1,39 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
-import { forgotpassword } from '../../actions/authActions'; // Import the correct action
+import { forgotpassword } from '../../actions/authActions';
 import { useDispatch, useSelector } from 'react-redux';
-import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 import './ForgotPassword.css';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { error, message } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email) {
-      toast.error('Please enter a valid email', { autoClose: 3000 });
+      alert('Please enter a valid email');
       return;
     }
 
-    // Dispatch forgot password action instead of loginUser
+    setLoading(true);
     dispatch(forgotpassword({ email }));
   };
 
   useEffect(() => {
     if (error) {
-      toast.error(error, { autoClose: 3000 });
+      setLoading(false);
+      alert(error);
     }
     if (message) {
-      toast.success(message, { autoClose: 3000 });
+      setLoading(false);
+      // Navigate to success page with message
+      navigate('/success', { state: { message } });
     }
-  }, [error, message]);
+  }, [error, message, navigate]);
 
   return (
     <div className="forgot-password-container">
-      <ToastContainer />
       <h1>Forgot Password</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -47,11 +50,17 @@ const ForgotPassword = () => {
           />
         </div>
         <div>
-          <button type="submit" className="btn-primary">
-            Submit
+          <button type="submit" className="btn-primary" disabled={loading}>
+            {loading ? 'Sending...' : 'Submit'}
           </button>
         </div>
       </form>
+
+      {loading && (
+        <div className="loader-overlay">
+          <div className="loader"></div>
+        </div>
+      )}
     </div>
   );
 };
