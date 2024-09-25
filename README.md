@@ -92,10 +92,6 @@ To run tests (if applicable):
 npm test
 \`\`\`
 
-## Deployment
-
-Instructions for deploying the backend to production (e.g., Heroku, AWS, etc.).
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
